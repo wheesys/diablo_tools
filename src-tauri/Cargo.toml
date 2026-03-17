@@ -2,6 +2,7 @@
 name = "diablo-tools-tauri"
 version = "0.1.0"
 edition = "2021"
+default-run = "diablo-tools-tauri"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
@@ -9,6 +10,7 @@ tauri-build = { version = "2", features = [] }
 [dependencies]
 tauri = { workspace = true, features = ["devtools"] }
 tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }

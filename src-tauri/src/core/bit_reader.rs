@@ -1,6 +1,7 @@
 // Copyright 2025 zl. All rights reserved.
 
 use super::error::{Error, Result};
+use std::io::{Seek, SeekFrom};
 
 /// 位级读取器，用于解析 D2S 二进制文件
 #[derive(Debug, Clone)]
@@ -8,6 +9,42 @@ pub struct BitReader {
     data: Vec<u8>,
     position: usize,
     bit_offset: u8,
+}
+
+impl Seek for BitReader {
+    fn seek(&mut self, pos: SeekFrom) -> std::io::Result<u64> {
+        match pos {
+            SeekFrom::Start(offset) => {
+                self.position = offset as usize;
+                self.bit_offset = 0;
+                Ok(self.position as u64)
+            }
+            SeekFrom::Current(offset) => {
+                let new_pos = self.position as i64 + offset;
+                if new_pos < 0 {
+                    return Err(std::io::Error::new(
+                        std::io::ErrorKind::InvalidInput,
+                        "seek before start",
+                    ));
+                }
+                self.position = new_pos as usize;
+                self.bit_offset = 0;
+                Ok(self.position as u64)
+            }
+            SeekFrom::End(offset) => {
+                let new_pos = self.data.len() as i64 + offset;
+                if new_pos < 0 {
+                    return Err(std::io::Error::new(
+                        std::io::ErrorKind::InvalidInput,
+                        "seek before start",
+                    ));
+                }
+                self.position = new_pos as usize;
+                self.bit_offset = 0;
+                Ok(self.position as u64)
+            }
+        }
+    }
 }
 
 impl BitReader {

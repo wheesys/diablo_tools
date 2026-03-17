@@ -1,4 +1,1434 @@
+/* Copyright 2025 zl. All rights reserved. */
+
+/* ========================================
+   全局样式 / CSS Variables
+   ======================================== */
+:root {
+  /* 主色调 - 现代化配色 */
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-light: #eef2ff;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  /* 中性色 */
+  --color-bg: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-dark: #cbd5e1;
+  --color-text: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+
+  /* 游戏主题色 */
+  --d2-gold: #c9a227;
+  --d2-gold-dark: #a6851f;
+  --d2-unique: #c7b377;
+  --d2-set: #00ff00;
+  --d2-rare: #ffff66;
+  --d2-magic: #6666ff;
+
+  /* 间距 */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* 圆角 */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* 阴影 */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================
+   App 容器
+   ======================================== */
 .app {
   width: 100%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+/* ========================================
+   顶部标题栏
+   ======================================== */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: white;
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.header-left h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+.version {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.header-right {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+/* ========================================
+   按钮
+   ======================================== */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-open {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-open:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+}
+
+.btn-backup {
+  background: var(--color-success);
+  color: white;
+}
+
+.btn-backup:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 14px;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ========================================
+   文件路径栏
+   ======================================== */
+.file-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 12px;
+}
+
+.file-label {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.file-path {
+  color: var(--color-text);
+  background: var(--color-bg-hover);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  max-width: 400px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   错误提示
+   ======================================== */
+.error-message {
+  margin: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-md);
+  color: #991b1b;
+  font-size: 13px;
+}
+
+/* ========================================
+   主内容区
+   ======================================== */
+.app-main {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   标签页导航
+   ======================================== */
+.tab-nav {
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: none;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  position: relative;
+}
+
+.tab-btn:hover {
+  color: var(--color-text);
+  background: var(--color-bg-hover);
+}
+
+.tab-btn.active {
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+}
+
+.tab-icon {
+  font-size: 14px;
+}
+
+/* ========================================
+   标签页内容
+   ======================================== */
+.tab-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+}
+
+/* ========================================
+   信息面板
+   ======================================== */
+.info-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.panel-section {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+}
+
+.panel-section h3 {
+  margin: 0 0 var(--spacing-md) 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 信息行 */
+.info-row {
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 140px;
+  flex: 1;
+}
+
+.info-group label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-group input[type="text"],
+.info-group input[type="number"] {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  background: var(--color-bg);
+}
+
+.info-group input[readOnly] {
+  background: var(--color-bg-hover);
+  color: var(--color-text-secondary);
+}
+
+.time-text {
+  padding: var(--spacing-sm);
+  color: var(--color-text-secondary);
+  font-size: 12px;
+}
+
+/* 徽章 */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+}
+
+.badge.hardcore {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.badge.softcore {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.badge.alive {
+  background: #f0fdf4;
+  color: #166534;
+}
+
+.badge.dead {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+/* ========================================
+   难度进度
+   ======================================== */
+.difficulty-row {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.difficulty-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.difficulty-item.unlocked {
+  border-color: var(--color-success);
+  background: #f0fdf4;
+}
+
+.difficulty-item.locked {
+  border-color: var(--color-border);
+  opacity: 0.6;
+}
+
+.diff-icon {
+  font-size: 24px;
+}
+
+.diff-name {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.diff-progress {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   属性网格
+   ======================================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.stat-box label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.stat-box input {
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  font-weight: 600;
+}
+
+.stat-box.highlight input {
+  border-color: var(--color-warning);
+  background: #fffbeb;
+  color: #92400e;
+}
+
+/* ========================================
+   进度条
+   ======================================== */
+.stat-bar-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.stat-bar-box label {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+}
+
+.progress-bar {
+  position: relative;
+  height: 24px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+
+.progress-fill.hp {
+  background: linear-gradient(90deg, #ef4444, #f87171);
+}
+
+.progress-fill.mana {
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+}
+
+.progress-fill.stamina {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.progress-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* ========================================
+   金币区域
+   ======================================== */
+.gold-row {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.gold-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border: 1px solid #fcd34d;
+  border-radius: var(--radius-md);
+}
+
+.gold-icon {
+  font-size: 28px;
+}
+
+.gold-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.gold-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #92400e;
+  text-transform: uppercase;
+}
+
+.gold-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #78350f;
+}
+
+/* ========================================
+   经验值区域
+   ======================================== */
+.exp-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-lg);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.exp-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.exp-label {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   物品面板 - 三栏布局
+   ======================================== */
+.items-panel {
+  height: 100%;
+}
+
+.items-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.8fr;
+  gap: var(--spacing-md);
+  height: 100%;
+}
+
+.items-layout > section {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.section-header {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-hover);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section-header h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 背包网格 */
+.inventory-section .inventory-grid {
+  flex: 1;
+  padding: var(--spacing-md);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  gap: 1px;
+  background: #22c55e;
+  border: 2px solid #16a34a;
+}
+
+.grid-cell {
+  background: rgba(255, 255, 255, 0.95);
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.grid-cell:hover {
+  background: white;
+  box-shadow: inset 0 0 0 2px var(--color-primary);
+}
+
+.grid-cell:active {
+  background: var(--color-primary-light);
+}
+
+/* 装备区域 */
+.equipment-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.equipment-grid {
+  flex: 1;
+  padding: var(--spacing-md);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: var(--spacing-sm);
+  align-content: start;
+}
+
+.equip-slot {
+  aspect-ratio: 1;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.equip-slot:hover {
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
+}
+
+.equip-slot .slot-label {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* 装备位置特殊布局 */
+.equip-slot.helm { grid-column: 2; grid-row: 1; }
+.equip-slot.amulet { grid-column: 2; grid-row: 2; }
+.equip-slot.armor { grid-column: 2; grid-row: 3; }
+.equip-slot.weapon-main { grid-column: 1; grid-row: 2; }
+.equip-slot.weapon-off { grid-column: 3; grid-row: 2; }
+.equip-slot.gloves { grid-column: 1; grid-row: 3; }
+.equip-slot.belt { grid-column: 2; grid-row: 4; }
+.equip-slot.ring-left { grid-column: 1; grid-row: 4; }
+.equip-slot.ring-right { grid-column: 3; grid-row: 4; }
+.equip-slot.boots { grid-column: 3; grid-row: 3; }
+
+/* 属性面板 */
+.properties-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.properties-content {
+  flex: 1;
+  padding: var(--spacing-md);
+  overflow-y: auto;
+}
+
+.properties-content .empty-hint {
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+/* ========================================
+   技能/任务空状态
+   ======================================== */
+.skills-panel,
+.quests-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skills-empty,
+.quests-empty {
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.skills-empty .empty-icon,
+.quests-empty .empty-icon {
+  font-size: 48px;
+  margin-bottom: var(--spacing-md);
+}
+
+.skills-empty h3,
+.quests-empty h3 {
+  margin: 0 0 var(--spacing-sm) 0;
+  font-size: 16px;
+  color: var(--color-text);
+}
+
+/* ========================================
+   空状态
+   ======================================== */
+.empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  color: var(--color-text-secondary);
+}
+
+.empty-icon {
+  font-size: 64px;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.empty-hint {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   底部状态栏
+   ======================================== */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-bg-card);
+  border-top: 1px solid var(--color-border);
+  font-size: 11px;
+}
+
+.footer-text {
+  color: var(--color-text-secondary);
+}
+
+.footer-status {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* ========================================
+   物品显示样式
+   ======================================== */
+
+/* 物品格子选中状态 */
+.grid-cell.selected,
+.equip-slot.selected {
+  box-shadow: inset 0 0 0 3px var(--color-primary);
+  background: var(--color-primary-light) !important;
+}
+
+/* 物品图标 */
+.item-icon {
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
+  padding: 2px;
+  transition: transform 0.15s ease;
+}
+
+.item-icon:hover {
+  transform: scale(1.05);
+}
+
+.item-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 已占用的格子 */
+.grid-cell.occupied {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 装备槽中的物品 */
+.equip-item {
+  width: 100%;
+  height: 100%;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  word-break: break-word;
+  padding: 4px;
+}
+
+.equip-item-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* ========================================
+   物品属性面板
+   ======================================== */
+
+.properties-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.empty-icon-small {
+  font-size: 32px;
+  opacity: 0.5;
+  margin-bottom: var(--spacing-sm);
+}
+
+.properties-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* 物品头部 */
+.item-header {
+  text-align: center;
+  padding-bottom: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.item-quality-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 10px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: var(--spacing-sm);
+}
+
+.item-title {
+  margin: var(--spacing-xs) 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.item-base {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+/* 物品需求 */
+.item-requirements {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+
+.req-label {
+  color: var(--color-text-secondary);
+}
+
+.req-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 物品属性列表 */
+.item-properties {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.property-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-bg-hover);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+}
+
+.property-name {
+  color: var(--color-text-secondary);
+}
+
+.property-value {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+/* 物品操作按钮 */
+.item-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: auto;
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.btn-small {
+  flex: 1;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: 11px;
+}
+
+.btn-edit {
+  background: var(--color-info);
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #2563eb;
+}
+
+.btn-delete {
+  background: var(--color-danger);
+  color: white;
+}
+
+.btn-delete:hover {
+  background: #dc2626;
+}
+
+/* 物品状态徽章 */
+.req-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  margin-right: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.req-identified {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.req-ethereal {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+
+.req-socketed {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.req-quantity {
+  background: #e0e7ff;
+  color: #4338ca;
+}
+
+.property-value.empty {
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ========================================
+   滚动条样式
+   ======================================== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ========================================
+   技能面板样式
+   ======================================== */
+.skills-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.skills-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-bg-card);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.skills-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.skills-summary {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.skills-points-badge {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.skills-points-badge strong {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* 难度选择标签 */
+.difficulty-tabs {
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.diff-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.diff-tab:hover {
+  background: var(--color-bg-hover);
+  color: var(--color-text);
+}
+
+.diff-tab.active {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.diff-tab span:first-child {
+  font-size: 14px;
+}
+
+/* 技能内容区 */
+.skills-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  background: var(--color-bg);
+}
+
+.skills-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* 技能树分组 */
+.skill-tree-group {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.skill-tree-title {
+  margin: 0;
+  padding: 12px var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-bg-hover) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.skill-tree-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 技能项 */
+.skill-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s ease;
+}
+
+.skill-item:last-child {
+  border-bottom: none;
+}
+
+.skill-item:hover {
+  background: var(--color-bg-hover);
+}
+
+.skill-item.invested {
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.05) 0%, transparent 100%);
+}
+
+.skill-item.invested:hover {
+  background: linear-gradient(90deg, rgba(79, 70, 229, 0.1) 0%, transparent 100%);
+}
+
+.skill-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.skill-item.invested .skill-name {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.skill-description {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+
+.skill-prerequisites {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* 技能等级控制 */
+.skill-level-control {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-left: var(--spacing-md);
+}
+
+.skill-btn {
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-card);
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.skill-btn:hover:not(:disabled) {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+.skill-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.skill-btn-inc {
+  color: var(--color-success);
+}
+
+.skill-btn-inc:hover:not(:disabled) {
+  background: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.skill-btn-dec {
+  color: var(--color-danger);
+}
+
+.skill-btn-dec:hover:not(:disabled) {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.skill-level-display {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  min-width: 50px;
+  justify-content: center;
+}
+
+.skill-level {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.skill-level.has-points {
+  color: var(--color-primary);
+  font-size: 18px;
+}
+
+.skill-max {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   任务面板样式
+   ======================================== */
+.quests-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.quests-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-md);
+  background: var(--color-bg);
+}
+
+.quests-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* 任务幕分组 */
+.quest-act-group {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.quest-act-title {
+  margin: 0;
+  padding: 12px var(--spacing-md);
+  background: linear-gradient(135deg, var(--color-bg-hover) 0%, var(--color-bg) 100%);
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.act-icon {
+  font-size: 16px;
+}
+
+.quest-act-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 任务项 */
+.quest-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  transition: background 0.15s ease;
+}
+
+.quest-item:last-child {
+  border-bottom: none;
+}
+
+.quest-item:hover {
+  background: var(--color-bg-hover);
+}
+
+.quest-item.completed {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 0.05) 0%, transparent 100%);
+}
+
+.quest-item.completed .quest-name {
+  color: var(--color-success);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.quest-info {
+  flex: 1;
+}
+
+.quest-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.quest-id {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-family: monospace;
+}
+
+/* 任务状态复选框 */
+.quest-status {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-left: var(--spacing-md);
+}
+
+.quest-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+
+.quest-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.quest-checkbox input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.quest-checkbox span {
+  white-space: nowrap;
 }

@@ -10,6 +10,7 @@ mod error;
 fn main() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             #[cfg(debug_assertions)]
             {
@@ -23,6 +24,12 @@ fn main() {
             commands::save::save_d2s,
             commands::save::get_character_info,
             commands::save::backup_save,
+            commands::items::get_items,
+            commands::items::get_item_details,
+            commands::skills::get_skills,
+            commands::skills::set_skill_level,
+            commands::quests::get_quests,
+            commands::quests::set_quest_status,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

@@ -12,6 +12,7 @@ pub mod waypoints_data;
 pub mod huffman;
 pub mod items;
 pub mod error;
+pub mod test_parse;
 
 // 导出常用类型
 pub use bit_reader::BitReader;
