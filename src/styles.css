@@ -1,0 +1,461 @@
+/* 暗黑风格配色 */
+:root {
+  --bg-dark: #0d0d0d;
+  --bg-card: #1a1a1a;
+  --bg-hover: #252525;
+  --border: #333;
+  --text-primary: #e0e0e0;
+  --text-secondary: #888;
+  --accent: #c8a050;
+  --accent-hover: #d4a85c;
+  --danger: #c45c5c;
+  --success: #5cb85c;
+  --highlight: #4a90d9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+.app-header {
+  background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* Main */
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* File Bar */
+.file-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  background: var(--bg-card);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+.file-bar button {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.file-bar button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.file-bar button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.file-path {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Error */
+.error-message {
+  background: rgba(196, 92, 92, 0.2);
+  border: 1px solid var(--danger);
+  color: var(--danger);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Character Panel */
+.character-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.panel-section h2 {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Info Grid */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.info-item label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.info-item span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-item label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.stat-item input {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  width: 100%;
+}
+
+.stat-item input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.stat-item.highlight input {
+  border-color: var(--highlight);
+  color: var(--highlight);
+}
+
+/* Gold Section */
+.gold-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.gold-value {
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* Action Bar */
+.action-bar {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.empty-state h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+/* 备份按钮 */
+.btn-backup {
+  background: var(--highlight);
+  color: white;
+}
+
+.btn-backup:hover {
+  background: #5a9fe8;
+}
+
+/* 等级徽章 */
+.level-badge {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* 专家模式/核心模式 */
+.hardcore {
+  color: var(--danger);
+  font-weight: bold;
+}
+
+.softcore {
+  color: var(--success);
+}
+
+.dead {
+  color: var(--danger);
+}
+
+.alive {
+  color: var(--success);
+}
+
+/* 时间文本 */
+.time-text {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* 难度网格 */
+.difficulty-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.difficulty-card {
+  background: var(--bg-dark);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.difficulty-card.unlocked {
+  border-color: var(--accent);
+  background: rgba(200, 160, 80, 0.1);
+}
+
+.difficulty-card.locked {
+  opacity: 0.5;
+}
+
+.difficulty-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.difficulty-icon {
+  font-size: 1.5rem;
+}
+
+.difficulty-name {
+  font-weight: 500;
+}
+
+.difficulty-progress {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+/* 属性名称 */
+.stat-name {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+/* 属性条 */
+.stat-bar {
+  position: relative;
+  height: 24px;
+  background: var(--bg-dark);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+
+.stat-bar-fill.hp {
+  background: linear-gradient(90deg, #c45c5c, #e87c7c);
+}
+
+.stat-bar-fill.mana {
+  background: linear-gradient(90deg, #4a90d9, #6aa8f9);
+}
+
+.stat-bar-fill.stamina {
+  background: linear-gradient(90deg, #5cb85c, #7cd87c);
+}
+
+.stat-bar-text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* 金币样式 */
+.gold-section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.gold-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--bg-dark);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.gold-icon {
+  font-size: 2rem;
+}
+
+.gold-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.gold-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* 经验值样式 */
+.exp-section {
+  text-align: center;
+  padding: 1rem;
+  background: var(--bg-dark);
+  border-radius: 8px;
+}
+
+.exp-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+.exp-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* 空状态提示 */
+.empty-hint {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}

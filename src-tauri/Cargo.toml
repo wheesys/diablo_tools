@@ -1,0 +1,22 @@
+[package]
+name = "diablo-tools-tauri"
+version = "0.1.0"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { workspace = true, features = ["devtools"] }
+tauri-plugin-shell = "2"
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+chrono = "0.4"
+
+# 核心解析库（后续创建）
+# diablo-core = { path = "../crates/diablo-core" }
+
+[features]
+default = ["custom-protocol"]
+custom-protocol = ["tauri/custom-protocol"]
